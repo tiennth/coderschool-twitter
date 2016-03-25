@@ -18,19 +18,13 @@ class LoginViewController: UIViewController {
     
     @IBAction func buttonLogicClicked(sender: UIButton) {
         TwitterClient.sharedClient.loginWithSuccess({ 
-//            self.performSegueWithIdentifier("loginSegue", sender: nil)
-            TwitterClient.sharedClient.currentUser({ (user) in
-                
-                }, failure: { (error: NSError) in
-                    
-            })
-            TwitterClient.sharedClient.homeTimeline({ (tweets: [Tweet]) in
-                print(tweets)
-                }, failure: { (error: NSError) in
-                    
-            })
+            self.performSegueWithIdentifier("loginSegue", sender: nil)
             }) { (error) in
-                
+                self.onLoginFailure(error)
         }
+    }
+    
+    func onLoginFailure(error: NSError) {
+        
     }
 }

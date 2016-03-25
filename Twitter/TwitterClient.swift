@@ -43,7 +43,6 @@ class TwitterClient: NSObject {
         loginSuccessClosure = success
         loginFailureClosure = failure
         
-        oauthSessionManager.deauthorize() // Just for testing.
         oauthSessionManager.fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string: "xxxTwitter://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential!) in
 
             let authorizeUrl = NSURL(string: "\(twitterBaseUrl)oauth/authorize?oauth_token=\(requestToken.token)")
@@ -81,9 +80,11 @@ class TwitterClient: NSObject {
     func homeTimeline(sucess:(([Tweet])->())?, failure: ((NSError)->())?) {
         oauthSessionManager.GET("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
             let dics = response as! [NSDictionary]
-            print(dics)
+            let tweets = Tweet.tweetsWithArray(dics)
+            sucess?(tweets)
         }) { (task: NSURLSessionDataTask?, error: NSError) in
             print("homeTimeline error \(error)")
+            failure?(error)
         }
     }
 }

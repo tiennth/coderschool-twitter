@@ -14,6 +14,7 @@ class Tweet: NSObject {
     var timeStamp: NSDate?
     var reTweetCount: Int = 0
     var favouriteCount: Int = 0
+    var user: User?
     
     init(json: NSDictionary) {
         text = json["text"] as? String
@@ -21,6 +22,9 @@ class Tweet: NSObject {
             // Tue Aug 28 21:08:15 +0000 2012
             Tweet.dateFormatter.dateFormat = "EEE MMM dd hh:mm:ss yyyy"
             timeStamp = Tweet.dateFormatter.dateFromString(timeStampString)
+        }
+        if let userDic = json["user"] as? NSDictionary {
+            user = User(json: userDic)
         }
         
         reTweetCount = json["retweet_count"] as? Int ?? 0
