@@ -13,9 +13,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        UINavigationBar.appearance().barTintColor = UIColor.appPrimaryColor()
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if User.currentUser == nil {
+            window?.rootViewController = sb.instantiateInitialViewController()
+        } else {
+            let vc = sb.instantiateViewControllerWithIdentifier("homeNavigationController")
+            window?.rootViewController = vc
+        }
+        
         return true
     }
 

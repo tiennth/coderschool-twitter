@@ -16,8 +16,6 @@ let twitterConsumerKey = "IJiEwmzlsTLqy35mjUMgQqPox"
 let twitterConsumerSecret = "9ju2FgfIeOWglUxMaOW6fEOLQbMYEqEB4TqUaC2ZhNXSEI21hq"
 
 class TwitterClient: NSObject {
-    private var accessToken: String!
-    private var accessSecret: String!
     private var oauthSessionManager: BDBOAuth1SessionManager!
     
     var loginSuccessClosure: (()->())?
@@ -28,7 +26,7 @@ class TwitterClient: NSObject {
             static var onceToken:dispatch_once_t = 0
             static var instance: TwitterClient? = nil
         }
-        dispatch_once(&Static.onceToken) { 
+        dispatch_once(&Static.onceToken) {
             Static.instance = TwitterClient(consumerKey: twitterConsumerKey, consumerSecret: twitterConsumerSecret)
         }
         return Static.instance!
@@ -39,12 +37,18 @@ class TwitterClient: NSObject {
         oauthSessionManager = BDBOAuth1SessionManager(baseURL: baseUrl, consumerKey: twitterConsumerKey, consumerSecret: twitterConsumerSecret)
     }
     
+    /**
+     Login then get current user. Success only if get current user success.
+     
+     - parameter success: block of code tend to be called when login success
+     - parameter failure: block of code tend to be called when login failure
+     */
     func loginWithSuccess(success: ()->(), failure: (NSError)->()) {
         loginSuccessClosure = success
         loginFailureClosure = failure
         
         oauthSessionManager.fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string: "xxxTwitter://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential!) in
-
+            
             let authorizeUrl = NSURL(string: "\(twitterBaseUrl)oauth/authorize?oauth_token=\(requestToken.token)")
             UIApplication.sharedApplication().openURL(authorizeUrl!)
             
@@ -58,7 +62,13 @@ class TwitterClient: NSObject {
         let requestToken = BDBOAuth1Credential(queryString: queryString)
         oauthSessionManager.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken:BDBOAuth1Credential!) in
             
-            self.loginSuccessClosure?()
+            self.currentUser({ (user: User) in
+                
+                self.loginSuccessClosure?()
+                
+                }, failure: { (error: NSError) in
+                    self.loginFailureClosure?(error)
+            })
             
         }) { (error: NSError!) in
             self.loginFailureClosure?(error)
@@ -69,7 +79,7 @@ class TwitterClient: NSObject {
         oauthSessionManager.GET("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
             let dic = response as! NSDictionary
             let user = User(json: dic)
-            print(dic)
+            User.currentUser = user
             success(user)
         }) { (task: NSURLSessionDataTask?, error: NSError) in
             print("getAcccount error \(error)")
@@ -79,6 +89,7 @@ class TwitterClient: NSObject {
     
     func homeTimeline(sucess:(([Tweet])->())?, failure: ((NSError)->())?) {
         oauthSessionManager.GET("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
+            print("homeTimeline success")
             let dics = response as! [NSDictionary]
             let tweets = Tweet.tweetsWithArray(dics)
             sucess?(tweets)
@@ -86,5 +97,19 @@ class TwitterClient: NSObject {
             print("homeTimeline error \(error)")
             failure?(error)
         }
+    }
+    
+    func newSimpleTweet(tweet:String, success:(()->())?, failure: ((NSError)->())?) {
+        let param = ["status":tweet]
+        oauthSessionManager.POST("1.1/statuses/update.json", parameters: param, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
+            success?()
+        }) { (task: NSURLSessionDataTask?, error: NSError) in
+            failure?(error)
+        }
+    }
+    
+    func logout() {
+        User.currentUser = nil
+        self.oauthSessionManager.deauthorize()
     }
 }
