@@ -726,8 +726,11 @@
                         <outlet property="nameLabel" destination="VVH-Pf-Ikq" id="Fup-Se-w24"/>
                         <outlet property="profileImageView" destination="nc0-je-9Dn" id="TAY-kL-mNW"/>
                         <outlet property="remainingCharacterLabel" destination="f91-fg-0MD" id="dIu-gL-Qqu"/>
+                        <outlet property="transparentBackgroundView" destination="fRm-OB-aaV" id="Fwf-wh-oKs"/>
                         <outlet property="tweetButton" destination="N9U-Y7-D2d" id="OmZ-XM-Dpz"/>
                         <outlet property="tweetTextView" destination="U1K-vz-AT7" id="1F1-MT-IYx"/>
+                        <outlet property="tweetView" destination="9oT-2n-qIl" id="fwk-Fe-cfu"/>
+                        <outlet property="tweetViewCenterYConstraint" destination="vPv-7N-Q1h" id="28v-BY-wCa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uli-Mu-wEX" userLabel="First Responder" sceneMemberID="firstResponder"/>

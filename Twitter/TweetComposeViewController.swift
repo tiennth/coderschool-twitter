@@ -16,6 +16,9 @@ protocol TweetComposerDelegate {
 
 class TweetComposeViewController: UIViewController {
     
+    @IBOutlet weak var transparentBackgroundView: UIView!
+    @IBOutlet weak var tweetView: UIView!
+    @IBOutlet weak var tweetViewCenterYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -33,6 +36,11 @@ class TweetComposeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TweetComposeViewController.onBackgroundTap(_:)))
+        self.transparentBackgroundView.addGestureRecognizer(tapGesture)
+        
+        
+        
         self.profileImageView.layer.masksToBounds = true
         self.profileImageView.layer.cornerRadius = 6
         self.tweetTextView.becomeFirstResponder()
@@ -52,6 +60,56 @@ class TweetComposeViewController: UIViewController {
         self.bindUserData()
         self.updateTweetButtonWithCharacterCount(self.tweetTextView.text.characters.count)
         self.updateRemainingCharacterCountLabelWithRemainingCount(kMaxTweetLong)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TweetComposeViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TweetComposeViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:  UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:  UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        let userInfo = notification.userInfo! as NSDictionary
+        let keyboardSizeValue = userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue
+        let keyboardSize = keyboardSizeValue.CGRectValue().size
+        let animDurationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let animCurveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+        
+        self.view.layoutIfNeeded()
+        UIView.animateWithDuration(animDurationValue.doubleValue,
+                                   delay: 0,
+                                   options: UIViewAnimationOptions(rawValue: UInt(animCurveValue.integerValue << 16)),
+                                   animations: {
+                                    self.tweetViewCenterYConstraint.constant = -(keyboardSize.height - self.tweetView.frame.size.height/2)
+                                    self.view.layoutIfNeeded()
+            },
+                                   completion: nil
+        )
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        let userInfo = notification.userInfo! as NSDictionary
+        let animDurationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let animCurveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+        
+        self.view.layoutIfNeeded()
+        UIView.animateWithDuration(animDurationValue.doubleValue,
+                                   delay: 0,
+                                   options: UIViewAnimationOptions(rawValue: UInt(animCurveValue.integerValue << 16)),
+                                   animations: {
+                                    self.tweetViewCenterYConstraint.constant = 0
+                                    self.view.layoutIfNeeded()
+            },
+                                   completion: nil
+        )
+    }
+    
+    func onBackgroundTap(sender: UIView) {
+        self.tweetTextView.resignFirstResponder()
     }
     
     @IBAction func buttonCancelClicked(sender: UIButton) {
