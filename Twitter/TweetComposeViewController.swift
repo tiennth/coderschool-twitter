@@ -16,6 +16,7 @@ protocol TweetComposerDelegate {
 
 class TweetComposeViewController: UIViewController {
     
+    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var handleNameLabel: UILabel!
@@ -23,7 +24,12 @@ class TweetComposeViewController: UIViewController {
     @IBOutlet weak var tweetTextView: UITextView!
     @IBOutlet weak var tweetButton: UIButton!
     
+    @IBOutlet weak var actionViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var actionImageView: UIImageView!
+    @IBOutlet weak var actionTextLabel: UILabel!
+    
     var delegate: TweetComposerDelegate?
+    var replyToTweetData: TweetReplyData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +37,20 @@ class TweetComposeViewController: UIViewController {
         self.profileImageView.layer.cornerRadius = 6
         self.tweetTextView.becomeFirstResponder()
         
+        if let _ = replyToTweetData {
+            actionViewHeightConstraint.constant = 18
+        } else {
+            actionViewHeightConstraint.constant = 0
+        }
+        self.view.layoutIfNeeded()
+        
+        if let replyToTweetData = replyToTweetData {
+            actionTextLabel.text = "In reply to \(replyToTweetData.authorName)"
+            self.tweetTextView.text = "@\(replyToTweetData.authorScreenName) "
+        }
+        
         self.bindUserData()
-        self.updateTweetButtonWithCharacterCount(0)
+        self.updateTweetButtonWithCharacterCount(self.tweetTextView.text.characters.count)
         self.updateRemainingCharacterCountLabelWithRemainingCount(kMaxTweetLong)
     }
     
@@ -41,8 +59,11 @@ class TweetComposeViewController: UIViewController {
     }
     
     @IBAction func buttonTweetClicked(sender: UIButton) {
-        
-        TwitterClient.sharedClient.newSimpleTweet(self.tweetTextView.text!, success: { 
+        var replyToTweetId:String? = nil
+        if let replyToTweetData = replyToTweetData {
+            replyToTweetId = replyToTweetData.tweetId
+        } 
+        TwitterClient.sharedClient.newSimpleTweet(self.tweetTextView.text!, inReplyToTweet: replyToTweetId, success: {
             self.delegate?.tweetComposerController(self, didPostTweetMessage: self.tweetTextView.text!)
             self.dismissViewControllerAnimated(true, completion: nil)
         }) { (error: NSError) in

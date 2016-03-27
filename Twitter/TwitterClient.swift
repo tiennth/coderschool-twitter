@@ -105,8 +105,12 @@ class TwitterClient: NSObject {
         }
     }
     
-    func newSimpleTweet(tweet:String, success:(()->())?, failure: ((NSError)->())?) {
-        let param = ["status":tweet]
+    func newSimpleTweet(tweet:String, inReplyToTweet tweetId:String?, success:(()->())?, failure: ((NSError)->())?) {
+        var param = ["status":tweet]
+        if tweetId != nil {
+            param["in_reply_to_status_id"] = tweetId
+        }
+        
         oauthSessionManager.POST("1.1/statuses/update.json", parameters: param, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
             success?()
         }) { (task: NSURLSessionDataTask?, error: NSError) in

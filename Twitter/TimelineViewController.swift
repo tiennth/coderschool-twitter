@@ -134,8 +134,20 @@ extension TimelineViewController: TweetComposerDelegate {
 
 extension TimelineViewController: TweetCellActionDelegate {
     func didClickReplyInTweetCell(cell: TweetCell) {
-        
-        
+        let indexPath = self.tweetsTableView.indexPathForCell(cell)
+        if let indexPath = indexPath {
+            let tweet = self.tweets[indexPath.row]
+            let replyData = TweetReplyData(tweetId: tweet.tweetId!, authorHandle: tweet.user!.screenName!, authorName: tweet.user!.name!)
+            
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let composer = sb.instantiateViewControllerWithIdentifier("TweetComposerVC")
+             as! TweetComposeViewController
+            composer.delegate = self
+            composer.replyToTweetData = replyData
+            composer.modalPresentationStyle = .OverCurrentContext
+            composer.modalTransitionStyle = .CrossDissolve
+            self.presentViewController(composer, animated: true, completion: nil)
+        }
     }
     
     func didClickRetweetInTweetCell(cell: TweetCell) {
@@ -153,7 +165,6 @@ extension TimelineViewController: TweetCellActionDelegate {
             
             cell.tweet = tweet
         }
-        
     }
     
     func didClickLikeInTweetCell(cell: TweetCell) {

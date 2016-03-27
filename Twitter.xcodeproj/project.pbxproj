@@ -24,6 +24,7 @@
 		72F0C84D1CA703270062531E /* AppPersistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C84C1CA703270062531E /* AppPersistent.swift */; };
 		72F0C84F1CA7D2990062531E /* TWDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C84E1CA7D2990062531E /* TWDate.swift */; };
 		72F0C8511CA7E7200062531E /* GlobalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C8501CA7E7200062531E /* GlobalConstant.swift */; };
+		72F0C8531CA837350062531E /* TweetReplyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C8521CA837350062531E /* TweetReplyData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		72F0C84C1CA703270062531E /* AppPersistent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPersistent.swift; sourceTree = "<group>"; };
 		72F0C84E1CA7D2990062531E /* TWDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWDate.swift; sourceTree = "<group>"; };
 		72F0C8501CA7E7200062531E /* GlobalConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstant.swift; sourceTree = "<group>"; };
+		72F0C8521CA837350062531E /* TweetReplyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetReplyData.swift; sourceTree = "<group>"; };
 		E98D9B409980799B21C834CE /* Pods-Twitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +117,7 @@
 			children = (
 				72F0C8381CA45BD30062531E /* Tweet.swift */,
 				72F0C83A1CA45BDD0062531E /* User.swift */,
+				72F0C8521CA837350062531E /* TweetReplyData.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				72F0C84B1CA6D5260062531E /* AppColor.swift in Sources */,
 				72F0C8441CA597BA0062531E /* TweetCell.swift in Sources */,
 				72F0C8511CA7E7200062531E /* GlobalConstant.swift in Sources */,
+				72F0C8531CA837350062531E /* TweetReplyData.swift in Sources */,
 				72F0C8481CA5CD800062531E /* TweetComposeViewController.swift in Sources */,
 				721746981CA1AA4E001A5981 /* AppDelegate.swift in Sources */,
 				72F0C83B1CA45BDD0062531E /* User.swift in Sources */,
