@@ -118,8 +118,10 @@ class TwitterClient: NSObject {
     func likeTweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
         let param = ["id":tweetId]
         oauthSessionManager.POST("1.1/favorites/create.json", parameters: param, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
+            print("Favorite success")
             success?()
         }) { (task: NSURLSessionDataTask?, error: NSError) in
+            print("Favorite failure \(error)")
             failure?(error)
         }
     }
@@ -127,8 +129,10 @@ class TwitterClient: NSObject {
     func unlikeTweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
         let param = ["id":tweetId]
         oauthSessionManager.POST("1.1/favorites/destroy.json", parameters: param, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
+            print("Remove favorite success")
             success?()
         }) { (task: NSURLSessionDataTask?, error: NSError) in
+            print("Remove favorite failure \(error)")
             failure?(error)
         }
     }
@@ -136,16 +140,20 @@ class TwitterClient: NSObject {
     // MARK: - Retweet - Unretweet
     func retweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
         oauthSessionManager.POST("1.1/statuses/retweet/\(tweetId).json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
+            print("Retweet success")
             success?()
         }) { (task: NSURLSessionDataTask?, error: NSError) in
+            print("Retweet failure \(error)")
             failure?(error)
         }
     }
     
     func unretweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
         oauthSessionManager.POST("1.1/statuses/unretweet/\(tweetId).json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
+            print("Unretweet success")
             success?()
         }) { (task: NSURLSessionDataTask?, error: NSError) in
+            print("Unretweet failure \(error)")
             failure?(error)
         }
     }

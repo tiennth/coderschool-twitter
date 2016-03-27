@@ -23,6 +23,7 @@
 		72F0C84B1CA6D5260062531E /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C84A1CA6D5260062531E /* AppColor.swift */; };
 		72F0C84D1CA703270062531E /* AppPersistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C84C1CA703270062531E /* AppPersistent.swift */; };
 		72F0C84F1CA7D2990062531E /* TWDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C84E1CA7D2990062531E /* TWDate.swift */; };
+		72F0C8511CA7E7200062531E /* GlobalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C8501CA7E7200062531E /* GlobalConstant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		72F0C84A1CA6D5260062531E /* AppColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		72F0C84C1CA703270062531E /* AppPersistent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPersistent.swift; sourceTree = "<group>"; };
 		72F0C84E1CA7D2990062531E /* TWDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWDate.swift; sourceTree = "<group>"; };
+		72F0C8501CA7E7200062531E /* GlobalConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstant.swift; sourceTree = "<group>"; };
 		E98D9B409980799B21C834CE /* Pods-Twitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +155,7 @@
 				72F0C84A1CA6D5260062531E /* AppColor.swift */,
 				72F0C84C1CA703270062531E /* AppPersistent.swift */,
 				72F0C84E1CA7D2990062531E /* TWDate.swift */,
+				72F0C8501CA7E7200062531E /* GlobalConstant.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				72F0C8351CA454840062531E /* TwitterClient.swift in Sources */,
 				72F0C84B1CA6D5260062531E /* AppColor.swift in Sources */,
 				72F0C8441CA597BA0062531E /* TweetCell.swift in Sources */,
+				72F0C8511CA7E7200062531E /* GlobalConstant.swift in Sources */,
 				72F0C8481CA5CD800062531E /* TweetComposeViewController.swift in Sources */,
 				721746981CA1AA4E001A5981 /* AppDelegate.swift in Sources */,
 				72F0C83B1CA45BDD0062531E /* User.swift in Sources */,

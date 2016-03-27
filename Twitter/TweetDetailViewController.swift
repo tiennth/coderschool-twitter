@@ -44,9 +44,29 @@ class TweetDetailViewController: UIViewController {
     }
     
     @IBAction func retweetButtonClicked(sender: UIButton) {
+        if (tweet.retweeted) {
+            TwitterClient.sharedClient.retweet(tweet.tweetId!, success: nil, failure: nil)
+            tweet.reTweetCount -= 1
+        } else {
+            TwitterClient.sharedClient.retweet(tweet.tweetId!, success: nil, failure: nil)
+            tweet.reTweetCount += 1
+        }
+        tweet.retweeted = !tweet.retweeted
+        
+        self.bindTweetDetail()
     }
     
     @IBAction func likeButtonClicked(sender: UIButton) {
+        if (tweet.favorited) {
+            TwitterClient.sharedClient.unlikeTweet(tweet.tweetId!, success: nil, failure: nil)
+            tweet.favouriteCount -= 1
+        } else {
+            TwitterClient.sharedClient.likeTweet(tweet.tweetId!, success: nil, failure: nil)
+            tweet.favouriteCount += 1
+        }
+        tweet.favorited = !tweet.favorited
+        
+        self.bindTweetDetail()
     }
 
     @IBAction func shareButtonClciked(sender: UIButton) {
@@ -57,6 +77,29 @@ class TweetDetailViewController: UIViewController {
         self.timestampLabel.text = dateFormatter.stringFromDate(self.tweet.timeStamp!)
         if let user = self.tweet.user {
             self.bindUserData(user)
+        }
+        // Action buttons
+        if self.tweet.retweeted {
+            self.retweetButton.setImage(UIImage(named: "retweet-on"), forState: .Normal)
+            self.retweetButton.setImage(UIImage(named: "retweet-on-pressed"), forState: .Highlighted)
+        } else {
+            self.retweetButton.setImage(UIImage(named: "retweet-off"), forState: .Normal)
+            self.retweetButton.setImage(UIImage(named: "retweet-off-pressed"), forState: .Highlighted)
+        }
+        
+        if self.tweet.favorited {
+            self.likeButton.setImage(UIImage(named: "like-on"), forState: .Normal)
+            self.likeButton.setImage(UIImage(named: "like-on-pressed"), forState: .Highlighted)
+        } else {
+            self.likeButton.setImage(UIImage(named: "like-off"), forState: .Normal)
+            self.likeButton.setImage(UIImage(named: "like-off-pressed"), forState: .Highlighted)
+        }
+        
+        self.retweetButton.enabled = true
+        if let userId = self.tweet.user?.userId {
+            if userId == User.currentUser?.userId! {
+                self.retweetButton.enabled = false
+            }
         }
     }
     

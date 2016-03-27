@@ -29,6 +29,7 @@ class TweetComposeViewController: UIViewController {
         super.viewDidLoad()
         self.profileImageView.layer.masksToBounds = true
         self.profileImageView.layer.cornerRadius = 6
+        self.tweetTextView.becomeFirstResponder()
         
         self.bindUserData()
         self.updateTweetButtonWithCharacterCount(0)

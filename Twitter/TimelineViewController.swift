@@ -31,16 +31,22 @@ class TimelineViewController: UIViewController {
     func initNavigationBar() {
         self.title = "Home"
         
-        let leftBarButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(TimelineViewController.onLeftBarButtonClick(_:)))
+        let leftBarButton = UIBarButtonItem(image: UIImage(named: "logout"), style: .Plain, target: self, action: #selector(TimelineViewController.onLeftBarButtonClick(_:)))
         self.navigationItem.leftBarButtonItem = leftBarButton
         
-        let rightBarButton = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(TimelineViewController.onRightBarButtonClick(_:)))
+        let rightBarButton = UIBarButtonItem(image: UIImage(named: "tweet"), style: .Plain, target: self, action: #selector(TimelineViewController.onRightBarButtonClick(_:)))
         self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
     func onLeftBarButtonClick(sender: UIBarButtonItem) {
         TwitterClient.sharedClient.logout()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let mbLoadingView = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        mbLoadingView.mode = MBProgressHUDMode.Indeterminate;
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            NSNotificationCenter.defaultCenter().postNotificationName(kUserLogoutNotificationKey, object: nil)
+        }
     }
     
     func onRightBarButtonClick(sender: UIBarButtonItem) {
@@ -128,14 +134,43 @@ extension TimelineViewController: TweetComposerDelegate {
 
 extension TimelineViewController: TweetCellActionDelegate {
     func didClickReplyInTweetCell(cell: TweetCell) {
-        let indexPath = self.tweetsTableView.indexPathForCell(cell)
+        
+        
     }
     
     func didClickRetweetInTweetCell(cell: TweetCell) {
         let indexPath = self.tweetsTableView.indexPathForCell(cell)
+        if let indexPath = indexPath {
+            let tweet = self.tweets[indexPath.row]
+            if (tweet.retweeted) {
+                TwitterClient.sharedClient.retweet(tweet.tweetId!, success: nil, failure: nil)
+                tweet.reTweetCount -= 1
+            } else {
+                TwitterClient.sharedClient.retweet(tweet.tweetId!, success: nil, failure: nil)
+                tweet.reTweetCount += 1
+            }
+            tweet.retweeted = !tweet.retweeted
+            
+            cell.tweet = tweet
+        }
+        
     }
     
     func didClickLikeInTweetCell(cell: TweetCell) {
         let indexPath = self.tweetsTableView.indexPathForCell(cell)
+        if let indexPath = indexPath {
+            let tweet = self.tweets[indexPath.row]
+            if (tweet.favorited) {
+                TwitterClient.sharedClient.unlikeTweet(tweet.tweetId!, success: nil, failure: nil)
+                tweet.favouriteCount -= 1
+            } else {
+                TwitterClient.sharedClient.likeTweet(tweet.tweetId!, success: nil, failure: nil)
+                tweet.favouriteCount += 1
+            }
+            tweet.favorited = !tweet.favorited
+            
+            cell.tweet = tweet
+        }
+       
     }
 }
