@@ -307,8 +307,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtG-k8-DcO">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="555"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3pF-Ii-0VB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="288"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3pF-Ii-0VB">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="287"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tweet_white" translatesAutoresizingMaskIntoConstraints="NO" id="8Ot-V1-scp">
                                                 <rect key="frame" x="8" y="8" width="64" height="64"/>
@@ -533,8 +533,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9oT-2n-qIl">
-                                <rect key="frame" x="20" y="202" width="335" height="261"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9oT-2n-qIl">
+                                <rect key="frame" x="20" y="203" width="335" height="261"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tweet_white" translatesAutoresizingMaskIntoConstraints="NO" id="nc0-je-9Dn">
                                         <rect key="frame" x="4" y="4" width="48" height="48"/>

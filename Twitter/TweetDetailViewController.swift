@@ -41,6 +41,16 @@ class TweetDetailViewController: UIViewController {
     }
     
     @IBAction func replyButtonClicked(sender: UIButton) {
+        let replyData = TweetReplyData(tweetId: tweet.tweetId!, authorHandle: tweet.user!.screenName!, authorName: tweet.user!.name!)
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let composer = sb.instantiateViewControllerWithIdentifier("TweetComposerVC")
+            as! TweetComposeViewController
+//        composer.delegate = self
+        composer.replyToTweetData = replyData
+        composer.modalPresentationStyle = .OverCurrentContext
+        composer.modalTransitionStyle = .CrossDissolve
+        self.presentViewController(composer, animated: true, completion: nil)
     }
     
     @IBAction func retweetButtonClicked(sender: UIButton) {
