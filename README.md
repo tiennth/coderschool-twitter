@@ -35,7 +35,9 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 
 ## Libraries used
-
+- AFNetworking
+- BDBOAuth1Manager
+- MBProgressHUD
 
 ## Video Walkthrough
 
@@ -46,12 +48,16 @@ Here's a walkthrough of implemented user stories:
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
+I want to do more for this assignment before submition, but because of limited time so i will do it later, after my submition.
+There are something that i want intent to do:
+- Handle heyboard show/hide when composing new tweet or when replying in tweet detail view controller.
+- Create personal view controller to show detail info of current user, like official Twitter app.
 
 Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [tiennth]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
