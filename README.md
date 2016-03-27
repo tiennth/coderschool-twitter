@@ -42,10 +42,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 I want to do more for this assignment before submition, but because of limited time so i will do it later, after my submition.
 There are something that i want intent to do:
-- Handle heyboard show/hide when composing new tweet or when replying in tweet detail view controller.
 - Create personal view controller to show detail info of current user, like official Twitter app.
-
-Describe any challenges encountered while building the app.
 
 ## License
 
