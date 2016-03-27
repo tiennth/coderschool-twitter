@@ -115,7 +115,7 @@ class TwitterClient: NSObject {
     }
     
     // MARK: - Favorite create/destroy
-    func likeTweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
+    func likeTweet(tweetId:String, success:(()->())?, failure:((NSError)->())?) {
         let param = ["id":tweetId]
         oauthSessionManager.POST("1.1/favorites/create.json", parameters: param, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
             print("Favorite success")
@@ -126,7 +126,7 @@ class TwitterClient: NSObject {
         }
     }
     
-    func unlikeTweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
+    func unlikeTweet(tweetId:String, success:(()->())?, failure:((NSError)->())?) {
         let param = ["id":tweetId]
         oauthSessionManager.POST("1.1/favorites/destroy.json", parameters: param, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
             print("Remove favorite success")
@@ -138,7 +138,7 @@ class TwitterClient: NSObject {
     }
     
     // MARK: - Retweet - Unretweet
-    func retweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
+    func retweet(tweetId:String, success:(()->())?, failure:((NSError)->())?) {
         oauthSessionManager.POST("1.1/statuses/retweet/\(tweetId).json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
             print("Retweet success")
             success?()
@@ -148,7 +148,7 @@ class TwitterClient: NSObject {
         }
     }
     
-    func unretweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
+    func unretweet(tweetId:String, success:(()->())?, failure:((NSError)->())?) {
         oauthSessionManager.POST("1.1/statuses/unretweet/\(tweetId).json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
             print("Unretweet success")
             success?()

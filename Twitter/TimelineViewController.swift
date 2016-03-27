@@ -143,7 +143,7 @@ extension TimelineViewController: TweetCellActionDelegate {
         if let indexPath = indexPath {
             let tweet = self.tweets[indexPath.row]
             if (tweet.retweeted) {
-                TwitterClient.sharedClient.retweet(tweet.tweetId!, success: nil, failure: nil)
+                TwitterClient.sharedClient.unretweet(tweet.tweetId!, success: nil, failure: nil)
                 tweet.reTweetCount -= 1
             } else {
                 TwitterClient.sharedClient.retweet(tweet.tweetId!, success: nil, failure: nil)

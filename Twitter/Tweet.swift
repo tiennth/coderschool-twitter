@@ -10,7 +10,7 @@ import UIKit
 
 class Tweet: NSObject {
     private static var dateFormatter = NSDateFormatter()
-    var tweetId:Int?
+    var tweetId:String?
     var text: String?
     var timeStamp: NSDate?
     var reTweetCount: Int = 0
@@ -22,7 +22,7 @@ class Tweet: NSObject {
     var favorited:Bool = false
     
     init(json: NSDictionary) {
-        tweetId = json["id"] as? Int
+        tweetId = json["id_str"] as? String
         text = json["text"] as? String
         if let timeStampString = json["created_at"] as? String {
             // Tue Aug 28 21:08:15 +0000 2012
