@@ -40,8 +40,14 @@ class TweetComposeViewController: UIViewController {
     }
     
     @IBAction func buttonTweetClicked(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-        delegate?.tweetComposerController(self, didPostTweetMessage: self.tweetTextView.text!)
+        
+        TwitterClient.sharedClient.newSimpleTweet(self.tweetTextView.text!, success: { 
+            self.delegate?.tweetComposerController(self, didPostTweetMessage: self.tweetTextView.text!)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }) { (error: NSError) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
     }
     
     func bindUserData() {

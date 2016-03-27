@@ -37,6 +37,7 @@ class TwitterClient: NSObject {
         oauthSessionManager = BDBOAuth1SessionManager(baseURL: baseUrl, consumerKey: twitterConsumerKey, consumerSecret: twitterConsumerSecret)
     }
     
+    // MARK: - Login/Logout
     /**
      Login then get current user. Success only if get current user success.
      
@@ -55,6 +56,11 @@ class TwitterClient: NSObject {
         }) { (error: NSError!) in
             self.loginFailureClosure?(error)
         }
+    }
+    
+    func logout() {
+        User.currentUser = nil
+        self.oauthSessionManager.deauthorize()
     }
     
     func handleOpenUrl(url: NSURL) {
@@ -108,8 +114,39 @@ class TwitterClient: NSObject {
         }
     }
     
-    func logout() {
-        User.currentUser = nil
-        self.oauthSessionManager.deauthorize()
+    // MARK: - Favorite create/destroy
+    func likeTweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
+        let param = ["id":tweetId]
+        oauthSessionManager.POST("1.1/favorites/create.json", parameters: param, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
+            success?()
+        }) { (task: NSURLSessionDataTask?, error: NSError) in
+            failure?(error)
+        }
+    }
+    
+    func unlikeTweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
+        let param = ["id":tweetId]
+        oauthSessionManager.POST("1.1/favorites/destroy.json", parameters: param, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
+            success?()
+        }) { (task: NSURLSessionDataTask?, error: NSError) in
+            failure?(error)
+        }
+    }
+    
+    // MARK: - Retweet - Unretweet
+    func retweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
+        oauthSessionManager.POST("1.1/statuses/retweet/\(tweetId).json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
+            success?()
+        }) { (task: NSURLSessionDataTask?, error: NSError) in
+            failure?(error)
+        }
+    }
+    
+    func unretweet(tweetId:Int, success:(()->())?, failure:((NSError)->())?) {
+        oauthSessionManager.POST("1.1/statuses/unretweet/\(tweetId).json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) in
+            success?()
+        }) { (task: NSURLSessionDataTask?, error: NSError) in
+            failure?(error)
+        }
     }
 }

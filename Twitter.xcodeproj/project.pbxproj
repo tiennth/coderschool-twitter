@@ -22,6 +22,7 @@
 		72F0C8481CA5CD800062531E /* TweetComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C8471CA5CD800062531E /* TweetComposeViewController.swift */; };
 		72F0C84B1CA6D5260062531E /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C84A1CA6D5260062531E /* AppColor.swift */; };
 		72F0C84D1CA703270062531E /* AppPersistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C84C1CA703270062531E /* AppPersistent.swift */; };
+		72F0C84F1CA7D2990062531E /* TWDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F0C84E1CA7D2990062531E /* TWDate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		72F0C8471CA5CD800062531E /* TweetComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetComposeViewController.swift; sourceTree = "<group>"; };
 		72F0C84A1CA6D5260062531E /* AppColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		72F0C84C1CA703270062531E /* AppPersistent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPersistent.swift; sourceTree = "<group>"; };
+		72F0C84E1CA7D2990062531E /* TWDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWDate.swift; sourceTree = "<group>"; };
 		E98D9B409980799B21C834CE /* Pods-Twitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +152,7 @@
 			children = (
 				72F0C84A1CA6D5260062531E /* AppColor.swift */,
 				72F0C84C1CA703270062531E /* AppPersistent.swift */,
+				72F0C84E1CA7D2990062531E /* TWDate.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				72F0C83B1CA45BDD0062531E /* User.swift in Sources */,
 				72F0C83F1CA45D410062531E /* LoginViewController.swift in Sources */,
 				72F0C8461CA5BEED0062531E /* TweetDetailViewController.swift in Sources */,
+				72F0C84F1CA7D2990062531E /* TWDate.swift in Sources */,
 				72F0C84D1CA703270062531E /* AppPersistent.swift in Sources */,
 				72F0C8391CA45BD30062531E /* Tweet.swift in Sources */,
 				72F0C8421CA5969D0062531E /* TimelineViewController.swift in Sources */,

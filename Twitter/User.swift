@@ -10,7 +10,7 @@ import UIKit
 
 class User: NSObject {
     var originalJson:NSDictionary?
-    
+    var userId: Int?
     var name:String?
     var profileImageURL:NSURL?
     var screenName:String?
@@ -31,7 +31,7 @@ class User: NSObject {
     
     init(json:NSDictionary) {
         originalJson = json
-        
+        userId = json["id"] as? Int
         name = json["name"] as? String
         if let profileImageUrlString = json["profile_image_url"] as? String {
             profileImageURL = NSURL(string: profileImageUrlString)

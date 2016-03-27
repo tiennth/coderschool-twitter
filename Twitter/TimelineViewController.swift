@@ -31,12 +31,16 @@ class TimelineViewController: UIViewController {
     func initNavigationBar() {
         self.title = "Home"
         
+        let leftBarButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(TimelineViewController.onLeftBarButtonClick(_:)))
+        self.navigationItem.leftBarButtonItem = leftBarButton
+        
         let rightBarButton = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(TimelineViewController.onRightBarButtonClick(_:)))
         self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
     func onLeftBarButtonClick(sender: UIBarButtonItem) {
-//        self.performSegueWithIdentifier("showTweetComposer", sender: self)
+        TwitterClient.sharedClient.logout()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func onRightBarButtonClick(sender: UIBarButtonItem) {
@@ -94,6 +98,7 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell") as! TweetCell
         cell.tweet = self.tweets![indexPath.row]
+        cell.delegate = self
         return cell
     }
     
@@ -117,5 +122,20 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
 extension TimelineViewController: TweetComposerDelegate {
     func tweetComposerController(composer: TweetComposeViewController, didPostTweetMessage tweet: String) {
         print("Posted \(tweet)")
+        self.loadTweets()
+    }
+}
+
+extension TimelineViewController: TweetCellActionDelegate {
+    func didClickReplyInTweetCell(cell: TweetCell) {
+        let indexPath = self.tweetsTableView.indexPathForCell(cell)
+    }
+    
+    func didClickRetweetInTweetCell(cell: TweetCell) {
+        let indexPath = self.tweetsTableView.indexPathForCell(cell)
+    }
+    
+    func didClickLikeInTweetCell(cell: TweetCell) {
+        let indexPath = self.tweetsTableView.indexPathForCell(cell)
     }
 }

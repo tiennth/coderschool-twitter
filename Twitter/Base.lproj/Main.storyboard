@@ -19,18 +19,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1b2-hX-bZn">
-                                <rect key="frame" x="164" y="182" width="46" height="30"/>
-                                <state key="normal" title="Login"/>
-                                <connections>
-                                    <action selector="buttonLogicClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V0Y-bn-zEO"/>
-                                </connections>
-                            </button>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batter" translatesAutoresizingMaskIntoConstraints="NO" id="qM2-ZH-ryf">
+                                <rect key="frame" x="139" y="255.5" width="96" height="96"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="96" id="1qs-Ex-O0a"/>
+                                    <constraint firstAttribute="width" constant="96" id="XXb-6z-2t0"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now click on the Bat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghi-EF-guv">
+                                <rect key="frame" x="66" y="371.5" width="243" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.34509803919999998" green="0.68627450980000004" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ghi-EF-guv" firstAttribute="top" secondItem="qM2-ZH-ryf" secondAttribute="bottom" constant="20" id="75L-9A-dh9"/>
+                            <constraint firstItem="qM2-ZH-ryf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YtI-CG-zGm"/>
+                            <constraint firstItem="qM2-ZH-ryf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-30" id="fPr-Re-6fH"/>
+                            <constraint firstItem="Ghi-EF-guv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="vZH-0E-Md0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ghi-EF-guv" secondAttribute="trailing" constant="50" id="z9Y-cM-wxk"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="batImageView" destination="qM2-ZH-ryf" id="Dft-X5-hLM"/>
                         <segue destination="j2p-c0-jdT" kind="presentation" identifier="loginSegue" modalTransitionStyle="crossDissolve" id="iSU-YO-fkd"/>
                     </connections>
                 </viewController>
@@ -62,10 +76,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="176.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fv9-nl-fQe">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fv9-nl-fQe" userLabel="ActionView">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="24"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uk2-sZ-P7Q">
+                                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reply" translatesAutoresizingMaskIntoConstraints="NO" id="Uk2-sZ-P7Q">
                                                             <rect key="frame" x="32" y="0.0" width="24" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="MCc-Va-9uh"/>
@@ -235,6 +249,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="actionImageView" destination="Uk2-sZ-P7Q" id="gZO-aq-lWg"/>
+                                            <outlet property="actionStringLabel" destination="IKh-kd-edd" id="tnH-Yg-Ezh"/>
+                                            <outlet property="actionViewHeightConstraint" destination="aCY-98-vJj" id="Blq-39-DTX"/>
                                             <outlet property="createdLabel" destination="dOM-eB-9rU" id="mWO-KN-45C"/>
                                             <outlet property="handleNameLabel" destination="cQj-a3-aEX" id="duz-EF-lXT"/>
                                             <outlet property="likeButton" destination="MPx-B6-QV1" id="0Fb-d6-Ebh"/>
@@ -675,6 +692,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="batter" width="60" height="60"/>
         <image name="like-off" width="12" height="11"/>
         <image name="reply" width="14" height="10"/>
         <image name="reply-pressed" width="14" height="10"/>

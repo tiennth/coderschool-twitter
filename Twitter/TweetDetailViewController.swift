@@ -26,17 +26,20 @@ class TweetDetailViewController: UIViewController {
     @IBOutlet weak var newReplyTextField: UITextField!
     @IBOutlet weak var sendReplyButton: UIButton!
     
+    let dateFormatter = NSDateFormatter()
     var tweet:Tweet!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.dateFormatter.dateFormat = "h:mm a dd MMM yy"
+        self.title = "Tweet"
+        
         self.profileImageView.layer.masksToBounds = true
         self.profileImageView.layer.cornerRadius = 8
         
         self.bindTweetDetail()
     }
-
+    
     @IBAction func replyButtonClicked(sender: UIButton) {
     }
     
@@ -51,6 +54,7 @@ class TweetDetailViewController: UIViewController {
     
     func bindTweetDetail() {
         self.textLabel.text = self.tweet.text
+        self.timestampLabel.text = dateFormatter.stringFromDate(self.tweet.timeStamp!)
         if let user = self.tweet.user {
             self.bindUserData(user)
         }
