@@ -59,7 +59,7 @@ class TweetComposeViewController: UIViewController {
         
         self.bindUserData()
         self.updateTweetButtonWithCharacterCount(self.tweetTextView.text.characters.count)
-        self.updateRemainingCharacterCountLabelWithRemainingCount(kMaxTweetLong)
+        self.updateRemainingCharacterCountLabelWithRemainingCount(kMaxTweetLong - self.tweetTextView.text.characters.count)
     }
     
     override func viewWillAppear(animated: Bool) {

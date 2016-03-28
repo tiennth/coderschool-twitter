@@ -27,6 +27,7 @@ class Tweet: NSObject {
         if let timeStampString = json["created_at"] as? String {
             // Tue Aug 28 21:08:15 +0000 2012
             Tweet.dateFormatter.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
+            Tweet.dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
             timeStamp = Tweet.dateFormatter.dateFromString(timeStampString)
         }
         if let userDic = json["user"] as? NSDictionary {
